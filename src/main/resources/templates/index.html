@@ -38,7 +38,11 @@
         </form>
 
     </nav>
-    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <h1 th:text=" 'username: '+${username}"> </h1>
+    <h1 th:text=" 'first name: '+${First}"> </h1>
+    <h1 th:text=" 'last name'+${Last}"> </h1>
+    <h1 th:text=" 'date Of Birth'+${date}"> </h1>
+    <h1 th:text=" 'bio:'+${bio}"> </h1>
 
 <!--    <h1  style="color:red;" th:text="hi+' '+${username}+'!'">!</h1>-->
 
