@@ -37,12 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {  //
                 .authorizeRequests()
                 .antMatchers("/login").permitAll() // allow to go to in without login
                 .antMatchers("/signup").permitAll()// allow to go to in without login
+                .antMatchers("/").permitAll()// allow to go to in without login
                 .anyRequest().authenticated() // any ather page need login
                 .and()
                 .formLogin() // in login form
                 .loginPage("/login") // the GitMapping rout in controller of login
                 .loginProcessingUrl("/perform_login") // the action of login form
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/dash")
                 .failureUrl("/login")
                 .and()
                 .logout()

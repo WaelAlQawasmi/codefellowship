@@ -4,6 +4,8 @@ import com.example.CodeFellowship.Rebository.ApplicationUserRebositry;
 import com.example.CodeFellowship.table.ApplicationUser;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.ArrayList;
 
 @Controller
 public class webController {
@@ -28,8 +33,8 @@ public class webController {
             return "login";
         }
 
-    @GetMapping("/")
-    public String index(Model model){
+    @GetMapping("/dash")
+    public String dash(Model model){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", userDetails.getUsername());
         model.addAttribute("First", ApplicationUserRebositry.findByusername(userDetails.getUsername()).getFirstName());
@@ -37,7 +42,7 @@ public class webController {
         model.addAttribute("bio", ApplicationUserRebositry.findByusername(userDetails.getUsername()).getBio());
         model.addAttribute("date", ApplicationUserRebositry.findByusername(userDetails.getUsername()).getDateOfBirth());
 
-        return "index";
+        return "dash";
     }
 
 
@@ -46,13 +51,32 @@ public class webController {
         return "signup";
     }
 
+    @GetMapping("/")
+    public String index(Model model){
+       try {
+           UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+           model.addAttribute("username", userDetails.getUsername());
+           return "index";   }
+       catch (Exception E){
+           return "index";
+       }
+
+       //
+
+    }
 
     @PostMapping ("/signup")
 
-    public String signup(String username, String password,String firstName,String lastName,String dateOfBirth,String bio){
+    public RedirectView signup(String username, String password, String firstName, String lastName, String dateOfBirth, String bio){
         ApplicationUser newUser= new ApplicationUser(username,encoder.encode(password),firstName,lastName,dateOfBirth,bio);
         ApplicationUserRebositry.save(newUser);
-            return "login";
+
+
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            return new RedirectView("/dash");
     }
 
 
