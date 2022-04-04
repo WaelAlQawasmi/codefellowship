@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Setter// use to create setter for all attribute
 @Getter// use to create getter for all attribute
@@ -15,9 +16,9 @@ public class ApplicationUser implements UserDetails {
 
    @Setter(value = AccessLevel.NONE)
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "id", nullable = false)
-   private int id;
+   @GeneratedValue
+//   @Column(name = "id", nullable = false)
+   private Long id;
 
    @NonNull
    @Column(unique = true)
@@ -60,4 +61,8 @@ public class ApplicationUser implements UserDetails {
    public boolean isEnabled() {
       return true;
    }
+
+
+   @OneToMany(mappedBy="applicationUser")
+   List<post> posts;
 }

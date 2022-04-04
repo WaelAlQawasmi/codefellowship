@@ -1,5 +1,95 @@
 
 
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bgimg {
+
+    background-image: url(https://ce.seattlecentral.edu/sites/conted/files/inline-images/code-fellows-logo-compact-2-color-1.png);
+    background-size: inherit;
+    background-color: #6a1818;
+    min-height: 70%;
+    background-image: coral;
+    background-position: center;
+    background-size: auto;
+    background-blend-mode: saturation;
+    background-repeat: no-repeat;
+    color: black;
+}
+
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+hr {
+  margin: auto;
+  width: 40%;
+}
+</style>
+<body>
+
+<div class="bgimg">
+    <div class="topleft">
+        <p>
+              </div>
+    <div class="middle">
+        <h1>codefellowship</h1>
+
+        <p id="demo" style="font-size:30px">ccodefellowship to hold My work
+            Useing the Spring Initializr to set up an app with dependencies on Web,
+            Thymeleaf, JPA, Postgres, and Security (and optionally DevTools for auto refresh of app on building).
+            <div th:if="${username==null}" >
+
+
+            <a href="/login" class="btn btn-primary my-2" style="color:black">logIn </a>
+            <a  href="/signup" class="btn btn-secondary my-2" style="color:black"> signup</a>
+        </div>
+
+
+
+        <div th:if="${username!=null}" >
+            <a th:if="${username!=null}" href="/perform_logout" class="btn btn-primary my-2" style="color:black">logout </a>
+            <a  th:if="${username!=null}" href="/signup" class="btn btn-secondary my-2">  </a>
+            <a  th:if="${username!=null}" href="/myprofile" class="btn btn-secondary my-2">  my profile</a>
+            <li class="list-group-item" th:text=" 'username: '+${username}" style="color:black"></li>
+        </div>
+    </div>
+
+
+
+
+</div>
+</div>
+        </p>
+
+
+<script>
+
+</script>
+
+</body>
+</html>
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
@@ -14,7 +104,7 @@ body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%
 color:black;}
 .bgimg {
-
+    background-color: #6a1818;
     min-height: 100%;
   background-position: center;
   background-size: cover;
@@ -24,34 +114,34 @@ color:black;}
 </head>
 <body>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white" style="color:black">
-    <div class="w3-display-topleft w3-padding-large w3-xlarge">
-        Logo
-    </div>
-    <div class="w3-display-middle">
-        <h1 class="w3-jumbo w3-animate-top" style="color:black"> codefellowship</h1>
-        <hr class="w3-border-grey" style="margin:auto;width:40%">
-        <p class="w3-large w3-center" style="color:black">codefellowship to hold My work
-            Useing the Spring Initializr to set up an app with dependencies on Web,
-            Thymeleaf, JPA, Postgres, and Security (and optionally DevTools for auto refresh of app on building).</p>
-        <div th:if="${username==null}" >
+<!--<div class="bgimg w3-display-container w3-animate-opacity w3-text-white" style="color:black">-->
+<!--    <div class="w3-display-topleft w3-padding-large w3-xlarge">-->
+<!--        Logo-->
+<!--    </div>-->
+<!--    <div class="w3-display-middle">-->
+<!--        <h1 class="w3-jumbo w3-animate-top" style="color:black"> codefellowship</h1>-->
+<!--        <hr class="w3-border-grey" style="margin:auto;width:40%">-->
+<!--        <p class="w3-large w3-center" style="color:black">codefellowship to hold My work-->
+<!--            Useing the Spring Initializr to set up an app with dependencies on Web,-->
+<!--            Thymeleaf, JPA, Postgres, and Security (and optionally DevTools for auto refresh of app on building).</p>-->
+<!--        <div th:if="${username==null}" >-->
 
 
-            <a href="/login" class="btn btn-primary my-2" style="color:black">logIn </a>
-            <a  href="/signup" class="btn btn-secondary my-2" style="color:black"> signup</a>
-        </div>
+<!--            <a href="/login" class="btn btn-primary my-2" style="color:black">logIn </a>-->
+<!--            <a  href="/signup" class="btn btn-secondary my-2" style="color:black"> signup</a>-->
+<!--        </div>-->
 
-        <div th:if="${username!=null}" >
-            <a th:if="${username!=null}" href="/perform_logout" class="btn btn-primary my-2" style="color:black">logout </a>
-            <a  th:if="${username!=null}" href="/signup" class="btn btn-secondary my-2">  </a>
-            <li class="list-group-item" th:text=" 'username: '+${username}" style="color:black"></li>
-        </div>
-    </div>
+<!--        <div th:if="${username!=null}" >-->
+<!--            <a th:if="${username!=null}" href="/perform_logout" class="btn btn-primary my-2" style="color:black">logout </a>-->
+<!--            <a  th:if="${username!=null}" href="/signup" class="btn btn-secondary my-2">  </a>-->
+<!--            <li class="list-group-item" th:text=" 'username: '+${username}" style="color:black"></li>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <div class="w3-display-bottomleft w3-padding-large">
-        Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
-    </div>
-</div>
+<!--    <div class="w3-display-bottomleft w3-padding-large">-->
+<!--        Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>-->
+<!--    </div>-->
+<!--</div>-->
 
 </body>
 </html>

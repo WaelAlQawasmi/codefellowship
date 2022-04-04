@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {  //
                 .formLogin() // in login form
                 .loginPage("/login") // the GitMapping rout in controller of login
                 .loginProcessingUrl("/perform_login") // the action of login form
-                .defaultSuccessUrl("/dash")
+                .defaultSuccessUrl("/myprofile")
                 .failureUrl("/login")
                 .and()
                 .logout()

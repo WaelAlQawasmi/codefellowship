@@ -32,8 +32,19 @@ and you can't pass to any page not authorize without login
 
 ## dash page
 > you can access it without dash at rout
-> /dash
+> /myprofile
 
 The site   display your information in this page after login.
 
 
+## add post
+> you can access it without dash at rout
+> /myprofile
+
+you can add posts and you can see your posts
+
+## search in user
+> you can access it without dash at rout
+> /users/{user_id}
+
+you can basic user info by this rout
