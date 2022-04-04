@@ -27,18 +27,22 @@
 <div class="container">
 
     <nav class="nav nav-pills flex-column flex-sm-row">
-        <form action="/dash" method="GET">
-            <input class="flex-sm-fill text-sm-center nav-link" type="submit" value=" MY account">
+        <form action="/" method="GET">
+            <input class="flex-sm-fill text-sm-center nav-link" type="submit" value=" index">
+        </form>
+        <form action="/myprofile" method="GET">
+            <input class="flex-sm-fill text-sm-center nav-link" type="submit" value=" my profile">
         </form>
 
         <form action="/perform_logout" method="POST">
             <input class="flex-sm-fill text-sm-center nav-link" type="submit" value="Log Out">
         </form>
-        <a href="/"> ok</a>
+
     </nav>
 
 
     <div class="card" style="width: 100%;">
+        <img  src="https://ce.seattlecentral.edu/sites/conted/files/inline-images/code-fellows-logo-compact-2-color-1.png" class="card-img-top"  style="max-hight: 35vh;" alt="...">
         <ul class="list-group list-group-flush">
             <li class="list-group-item" th:text=" 'username: '+${username}"></li>
             <li class="list-group-item" th:text=" 'first name: '+${First}"></li>
@@ -49,6 +53,24 @@
         </ul>
     </div>
 
+
+    <div th:if="${IsSame==true}" >
+    <form th:action="'/'+addpost+'/'+${username}" method="POST">
+        <div class="mb-3">
+
+            <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add post</button>
+    </form>
+
+        <div class="card"  th:each="post:${allpost}" >
+            <div class="card-body" th:text="${post.body}">
+
+            </div>
+            <p  th:text="${post.createdAt}"></p>
+        </div>
+
+    </div>
 <!--    <h1  style="color:red;" th:text="hi+' '+${username}+'!'">!</h1>-->
 
 
