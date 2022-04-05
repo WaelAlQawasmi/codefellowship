@@ -10,4 +10,5 @@ public interface ApplicationUserRebositry extends JpaRepository<ApplicationUser,
     ApplicationUser findByusername(String username);  //to find userName
 
 
+
 }

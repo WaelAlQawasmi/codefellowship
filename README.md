@@ -46,5 +46,27 @@ you can add posts and you can see your posts
 ## search in user
 > you can access it without dash at rout
 > /users/{user_id}
+> > or from all users button in profile
 
 you can basic user info by this rout
+
+## Following
+> you can access  without dash at rout
+> /users/{user_id}
+> or from all userits button in profile
+
+you can follow the user that you haven't followed yet anfer follow the user , you can see all posts in feed
+
+## feed
+> you can access  without dash at rout
+> /feed
+> or from feed button in profile
+
+you can see your posts and the users that followed posts
+
+
+# Set up this app
+- create DB in postgres called "userdata"
+- chang the application.properties with your username and password in postgres
+- start postgres by this command
+> pg_ctl -D /home/linuxbrew/.linuxbrew/var/postgres start
