@@ -65,4 +65,16 @@ public class ApplicationUser implements UserDetails {
 
    @OneToMany(mappedBy="applicationUser")
    List<post> posts;
+
+   @ManyToMany
+   @JoinTable(
+           name = "following_followers",
+           joinColumns = {@JoinColumn(name = "from_id")},
+           inverseJoinColumns = {@JoinColumn(name = "to_id")}
+   )
+   List <ApplicationUser> following;
+
+   @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER)
+   public List<ApplicationUser> followers;
+
 }

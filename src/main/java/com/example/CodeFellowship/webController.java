@@ -78,14 +78,14 @@ List<post> posta=  postRebository.findByapplicationUserId(id);
     @GetMapping("/users/{id}")
     public String users(Model model , @PathVariable Long id){
             System.out.println(id);
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-
+        UserDetails CurrentUserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+String CurrentUserName=CurrentUserDetails.getUsername();
+        ApplicationUser currentUser= ApplicationUserRebositry.findByusername(CurrentUserName);
 
         ApplicationUser user = ApplicationUserRebositry.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 
-        model.addAttribute("IsSame", false);
+
 
         model.addAttribute("username", user.getUsername());
         model.addAttribute("First", user.getFirstName());
@@ -93,6 +93,24 @@ List<post> posta=  postRebository.findByapplicationUserId(id);
         model.addAttribute("bio", user.getBio());
         model.addAttribute("date", user.getDateOfBirth());
         System.out.println(user.getUsername()+".................3");
+if(currentUser.getId()==id){
+    model.addAttribute("IsSame", true);
+}
+else {
+    model.addAttribute("IsSame", false);
+}
+if(currentUser.getFollowing().contains(user)){
+    model.addAttribute("isFollowed","true");
+    System.out.println(true);
+}
+else
+
+
+      {
+            model.addAttribute("isFollowed",false);
+            System.out.println(false);
+
+        }
 
         return "dash";
     }
@@ -147,6 +165,65 @@ List<post> posta=  postRebository.findByapplicationUserId(id);
 
 
         return new RedirectView("/myprofile");
+    }
+
+    @GetMapping("/allusers")
+
+    public String allusers(Model users){
+
+
+        List<ApplicationUser> user=  ApplicationUserRebositry.findAll();
+
+   users.addAttribute("users",user);
+
+
+        return ("users");
+    }
+
+
+    @PostMapping("users/follow/{id}")
+
+    public RedirectView following(Model folloeingUser,@PathVariable("id") Long id){
+       // System.out.println("id-----------"+id);
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      String CurrentUserName=userDetails.getUsername();
+        ApplicationUser currentUser= ApplicationUserRebositry.findByusername(CurrentUserName);
+        ApplicationUser usertofollow = ApplicationUserRebositry.findById(id).orElseThrow();
+
+
+        currentUser.getFollowing().add(usertofollow);
+
+        usertofollow.getFollowers().add(currentUser);
+        ApplicationUserRebositry.save(usertofollow);
+        ApplicationUserRebositry.save(currentUser);
+        folloeingUser.addAttribute("users",currentUser.getFollowing());
+        return new RedirectView ("/allusers");
+    }
+
+
+
+
+    @GetMapping("/feed")
+    public String feed(Model model){
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Long id =ApplicationUserRebositry.findByusername(userDetails.getUsername()).getId();
+        List<post> posta=  postRebository.findByapplicationUserId(id);
+      List<ApplicationUser> following=  ApplicationUserRebositry.findByusername(userDetails.getUsername()).getFollowing();
+      if(following.size()>0) {
+        for (ApplicationUser followingUser :following ) {
+posta.addAll( postRebository.findByapplicationUserId(followingUser.getId()))
+       ;
+
+        }
+
+      }
+        model.addAttribute("allpost", posta );
+
+
+
+        return "feed";
     }
 
 }
