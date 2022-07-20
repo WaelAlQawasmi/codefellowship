@@ -35,8 +35,6 @@ public class ApplicationUser implements UserDetails {
    private String bio;
 
 
-
-
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
       return null;
