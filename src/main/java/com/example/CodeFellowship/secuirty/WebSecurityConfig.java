@@ -15,10 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity//to enable the  HttpSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {  //
 
-    @Autowired // to acces to rebo methode without create anstans
+    @Autowired // to acces to the privet probrates and methode in the class
     userDetalesServiseimp userDetailsService;
 
-    @Bean// to accec to any class methods without create instans
+    @Bean// to create mehode return instans
     public PasswordEncoder getPasswordEncoder(){ // auto created
         PasswordEncoder encoder = new BCryptPasswordEncoder();// to select the encode
 
